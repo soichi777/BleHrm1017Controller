@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 public class ControllerFragment extends Fragment {
 
 	private static final String LOGTAG = "BLETEST";
-	private static final boolean DEBUG = true;
 
 	private BleWrapper mBleWrapper = null;
 
