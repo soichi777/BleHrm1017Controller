@@ -1,6 +1,6 @@
-package menu;
+package com.soichi.hrm1017controller.presentation.menu;
 
-import com.soichi.ble.lib.BleWrapper;
+import com.soichi.lib.ble.BleWrapper;
 
 import android.content.Context;
 

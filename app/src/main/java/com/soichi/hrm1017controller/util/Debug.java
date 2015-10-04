@@ -1,4 +1,4 @@
-package util;
+package com.soichi.hrm1017controller.util;
 
 import android.os.Build;
 

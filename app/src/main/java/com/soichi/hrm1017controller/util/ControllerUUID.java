@@ -1,4 +1,4 @@
-package util;
+package com.soichi.hrm1017controller.util;
 
 import java.util.UUID;
 

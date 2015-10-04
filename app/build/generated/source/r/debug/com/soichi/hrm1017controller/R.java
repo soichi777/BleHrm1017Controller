@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.soichi.blehrm1017controller;
+package com.soichi.hrm1017controller;
 
 public final class R {
     public static final class attr {

@@ -1,7 +1,7 @@
-package util;
+package com.soichi.hrm1017controller.util;
 
 import java.util.HashMap;
-import com.soichi.ble.lib.BleNamesResolver;
+import com.soichi.lib.ble.BleNamesResolver;
 
 public class ControllerNamesResolver extends BleNamesResolver {
 	
