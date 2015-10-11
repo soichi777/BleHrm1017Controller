@@ -16,4 +16,9 @@ public class Debug {
 		return Build.FINGERPRINT.startsWith("generic");
 	}
 
+	public static final boolean ACTIVE = true;
+	public static final boolean INACTIVE = false;
+
+	public static final String LOGTAG = "BLETEST";
+
 }

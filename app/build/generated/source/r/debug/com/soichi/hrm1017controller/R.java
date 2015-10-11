@@ -9,6 +9,20 @@ package com.soichi.hrm1017controller;
 
 public final class R {
     public static final class attr {
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+         */
+        public static final int strokeColor=0x7f010001;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int strokeWidth=0x7f010000;
     }
     public static final class dimen {
         public static final int activity_horizontal_margin=0x7f050000;
@@ -18,12 +32,15 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080003;
-        public static final int action_start_scan=0x7f080004;
-        public static final int action_stop_scan=0x7f080005;
+        public static final int action_settings=0x7f080008;
+        public static final int action_start_scan=0x7f080005;
+        public static final int action_stop_scan=0x7f080006;
+        public static final int action_toggle_classic_controller=0x7f080007;
+        public static final int circle_view_id=0x7f080001;
+        public static final int classic_controller_fragment=0x7f080002;
         public static final int container=0x7f080000;
-        public static final int left_turn_button=0x7f080002;
-        public static final int right_turn_button=0x7f080001;
+        public static final int left_turn_button=0x7f080004;
+        public static final int right_turn_button=0x7f080003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -34,9 +51,11 @@ public final class R {
     }
     public static final class string {
         public static final int action_settings=0x7f060000;
-        public static final int app_name=0x7f060001;
-        public static final int hello_world=0x7f060002;
-        public static final int right_turn_button=0x7f060003;
+        public static final int action_toggle_classic_controller=0x7f060001;
+        public static final int app_name=0x7f060002;
+        public static final int hello_world=0x7f060003;
+        public static final int right_turn_button=0x7f060004;
+        public static final int scan=0x7f060005;
     }
     public static final class style {
         /**  API 11 theme customizations can go here. 
@@ -52,4 +71,47 @@ public final class R {
          */
         public static final int AppTheme=0x7f040001;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a CircleView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #CircleView_strokeColor com.soichi.blehrm1017controller:strokeColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #CircleView_strokeWidth com.soichi.blehrm1017controller:strokeWidth}</code></td><td></td></tr>
+           </table>
+           @see #CircleView_strokeColor
+           @see #CircleView_strokeWidth
+         */
+        public static final int[] CircleView = {
+            0x7f010000, 0x7f010001
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.soichi.blehrm1017controller.R.attr#strokeColor}
+          attribute's value can be found in the {@link #CircleView} array.
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+          @attr name com.soichi.blehrm1017controller:strokeColor
+        */
+        public static final int CircleView_strokeColor = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.soichi.blehrm1017controller.R.attr#strokeWidth}
+          attribute's value can be found in the {@link #CircleView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.soichi.blehrm1017controller:strokeWidth
+        */
+        public static final int CircleView_strokeWidth = 0;
+    };
 }

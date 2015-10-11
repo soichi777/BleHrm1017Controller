@@ -4,10 +4,6 @@ import android.app.Activity;
 
 import java.util.List;
 
-import com.soichi.hrm1017controller.R;
-import com.soichi.lib.ble.BleWrapper;
-import com.soichi.lib.ble.BleWrapperUiCallbacks;
-
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
@@ -19,14 +15,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
 import com.soichi.hrm1017controller.util.ControllerNamesResolver;
 import com.soichi.hrm1017controller.util.Debug;
+import com.soichi.hrm1017controller.R;
+import com.soichi.lib.ble.BleWrapper;
+import com.soichi.lib.ble.BleWrapperUiCallbacks;
 
 public class MainActivity extends Activity {
-
-	// TODO move this definition to Debug class
-	private static final String LOGTAG = "BLETEST";
-	private static final boolean DEBUG = true;
 
 	private BleWrapper mBleWrapper = null;
 
@@ -43,8 +39,8 @@ public class MainActivity extends Activity {
 				// TODO "MainActivity.this" may be wrong???
 				Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
 
-				if (DEBUG) {
-					Log.d(LOGTAG, msg);
+				if (Debug.ACTIVE) {
+					Log.d(Debug.LOGTAG, msg);
 				}
 
 				connect(device);
@@ -62,8 +58,8 @@ public class MainActivity extends Activity {
 					// TODO
 					String serviceName = ControllerNamesResolver.resolveUuid(service.getUuid().toString());
 
-					if (DEBUG) {
-						Log.d(LOGTAG, "service uuid is: " + service.getUuid() + " " + serviceName);
+					if (Debug.ACTIVE) {
+						Log.d(Debug.LOGTAG, "service uuid is: " + service.getUuid() + " " + serviceName);
 					}
 
 					mBleWrapper.getCharacteristicsForService(service);
@@ -78,12 +74,13 @@ public class MainActivity extends Activity {
 					byte[] rawValue, String timestamp) {
 				super.uiNewValueForCharacteristic(gatt, device, service, ch, strValue, intValue, rawValue, timestamp);
 
-				if (DEBUG)
-					Log.d(LOGTAG, "uiNewValueForCharacteristic");
+				if (Debug.ACTIVE) {
+					Log.d(Debug.LOGTAG, "uiNewValueForCharacteristic");
+				}
 
 				for (byte b : rawValue) {
-					if (DEBUG) {
-						Log.d(LOGTAG, "Val: " + b);
+					if (Debug.ACTIVE) {
+						Log.d(Debug.LOGTAG, "Val: " + b);
 					}
 				}
 
@@ -96,7 +93,7 @@ public class MainActivity extends Activity {
 		}
 
 		if (savedInstanceState == null) {
-			final ControllerFragment ctrl = new ControllerFragment();
+			final ClassicControllerFragment ctrl = new ClassicControllerFragment();
 			ctrl.initialize(mBleWrapper);
 			getFragmentManager().beginTransaction().add(R.id.container, ctrl).commit();
 		}
@@ -107,14 +104,18 @@ public class MainActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 
-		if (!Debug.isEmulator() && mBleWrapper.isBtEnabled() == false) {
+		if (Debug.isEmulator()) {
+			return;
+		}
+
+		if (mBleWrapper.isBtEnabled() == false) {
 			Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 			startActivity(enableBtIntent);
 			finish();
 		}
 		Boolean result = mBleWrapper.initialize();
 		if (result == false) {
-			Log.d(LOGTAG, "error occured in onResume");
+			Log.d(Debug.LOGTAG, "error occured in onResume");
 			finish();
 		}
 
@@ -127,6 +128,11 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onPause() {
 		super.onPause();
+
+		if (Debug.isEmulator()) {
+			return;
+		}
+
 		mBleWrapper.diconnect();
 		mBleWrapper.close();
 	}
@@ -150,11 +156,11 @@ public class MainActivity extends Activity {
 			return status;
 		}
 		
-		if (device.getName().equals("mbed AI robot") == true) {
+		if (device.getName().equals("mbed AI robot")) {
 			status = mBleWrapper.connect(device.getAddress().toString());
 			if (status == false) {
-				if (DEBUG) {
-					Log.d(LOGTAG, "uiDeviceFound: Connection problem");
+				if (Debug.ACTIVE) {
+					Log.d(Debug.LOGTAG, "uiDeviceFound: Connection problem");
 				}
 			}
 		}

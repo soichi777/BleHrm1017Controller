@@ -2,6 +2,7 @@ package com.soichi.hrm1017controller.presentation;
 
 import com.soichi.hrm1017controller.R;
 import com.soichi.lib.ble.BleWrapper;
+import com.soichi.hrm1017controller.util.Debug;
 
 import android.app.Fragment;
 import android.bluetooth.BluetoothGattCharacteristic;
@@ -15,10 +16,7 @@ import com.soichi.hrm1017controller.util.ControllerUUID;
 
 import android.view.ViewGroup;
 
-public class ControllerFragment extends Fragment {
-
-    private static final String LOGTAG = "BLETEST";
-    private static final boolean DEBUG = true;
+public class ClassicControllerFragment extends Fragment {
 
     private BleWrapper mBleWrapper = null;
 
@@ -67,7 +65,6 @@ public class ControllerFragment extends Fragment {
         };
 
         View view = inflator.inflate(R.layout.fragment_controller, container, false);
-        //view.findViewById(R.id.right_turn_button).setOnClickListener(rightTurnButtonClickListener);
         view.findViewById(R.id.left_turn_button).setOnTouchListener(leftTurnButtonTouchListener);
         view.findViewById(R.id.right_turn_button).setOnTouchListener(rightTurnButtonTouchListener);
 

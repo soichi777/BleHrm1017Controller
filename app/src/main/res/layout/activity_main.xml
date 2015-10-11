@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apptemplate="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<!--     <fragment android:name="com.soichi.blehrm1017controller.ControllerFragment" -->
+
+    <com.soichi.hrm1017controller.presentation.example.CircleView
+        android:id="@+id/circle_view_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        apptemplate:strokeWidth="5"
+        apptemplate:strokeColor="@android:color/holo_red_dark"
+        />
+
+<!--     <fragment android:name="com.soichi.blehrm1017controller.ClassicControllerFragment" -->
 <!--             android:id="@+id/list" -->
 <!--             android:layout_weight="1" -->
 <!--             android:layout_width="0dp" -->
