@@ -14,9 +14,10 @@ public class ToggleClassicControllerActionHandler implements OptionsItemActionHa
     @Override
     public boolean handle(Context context, BleWrapper bleWrapper) {
         Activity activity = (Activity) context;
-        ClassicControllerFragment fragment = (ClassicControllerFragment) activity.getFragmentManager().findFragmentById(R.id.classic_controller_fragment);
-        fragment.getFragmentManager().popBackStack();
-        Log.d(Debug.LOGTAG, activity.toString() + " is the activity");
+        //ClassicControllerFragment fragment = (ClassicControllerFragment) activity.getFragmentManager().findFragmentById(R.id.container);
+        //fragment.getFragmentManager().popBackStack();
+        //Log.d(Debug.LOGTAG, fragment.toString() + " is the fragment");
+        activity.getFragmentManager().popBackStack();
         return true;
     }
 }
