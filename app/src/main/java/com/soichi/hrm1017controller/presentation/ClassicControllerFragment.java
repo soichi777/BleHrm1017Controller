@@ -77,7 +77,7 @@ public class ClassicControllerFragment extends Fragment {
      *
      * @param BleWrapper
      */
-    public void initialize(BleWrapper wrapper) {
+    public void setBleWrapper(BleWrapper wrapper) {
         mBleWrapper = wrapper;
     }
 }

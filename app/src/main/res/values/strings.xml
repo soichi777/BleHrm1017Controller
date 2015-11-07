@@ -7,4 +7,5 @@
     <string name="action_settings">Settings</string>
     <string name="action_toggle_classic_controller">Toggle Controller</string>
 	<string name="right_turn_button">Turn Right</string>
+    <string name="section_format">BLE controller from section: %1$d</string>
 </resources>

@@ -1,23 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:apptemplate="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
-    android:orientation="horizontal"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:id="@+id/root_container"
+    tools:context=".MainActivity">
 
-    <com.soichi.hrm1017controller.presentation.example.CircleView
-        android:id="@+id/circle_view_id"
-        android:layout_width="wrap_content"
+    <android.support.design.widget.AppBarLayout
         android:layout_height="wrap_content"
-        apptemplate:strokeWidth="5"
-        apptemplate:strokeColor="@android:color/holo_red_dark"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <com.soichi.hrm1017controller.presentation.main.widget.InteractiveMonitorLayout
+        android:id="@+id/interactive_monitor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"/>
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"/>-->
+
+
+    <com.soichi.hrm1017controller.presentation.main.widget.ClassicControllerLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:id="@+id/classic_controller"
+        style="@style/ClassicController">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FORWARD"
+            android:id="@+id/btn_forward"
+            android:layout_alignParentTop="true"
+            android:layout_alignEnd="@+id/btn_sense"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SENSE"
+            android:layout_below="@id/btn_forward"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/btn_sense"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Left"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/btn_left"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Right"
+            android:layout_alignParentRight="true"
+            android:id="@+id/btn_right"/>
+
+    </com.soichi.hrm1017controller.presentation.main.widget.ClassicControllerLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="top|right|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_anchor="@id/classic_controller"
+        app:layout_anchorGravity="right"
+        android:src="@android:drawable/ic_input_add"
+        style="@style/FloatingActionButton"
         />
 
-<!--     <fragment android:name="com.soichi.blehrm1017controller.ClassicControllerFragment" -->
-<!--             android:id="@+id/list" -->
-<!--             android:layout_weight="1" -->
-<!--             android:layout_width="0dp" -->
-<!--             android:layout_height="match_parent" /> -->
-    
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
