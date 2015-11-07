@@ -2,6 +2,7 @@ package com.soichi.hrm1017controller.presentation;
 
 import java.util.List;
 
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 			public void onClick(View view) {
 
 				if (mClassicControllerLayout == null) {
-					mClassicControllerLayout = (ClassicControllerLayout) findViewById(R.id.classic_controller);
+					mClassicControllerLayout = (ClassicControllerLayout) findViewById(R.id.classic_controller_fragment);
 					mClassicControllerLayout.init();
 
 					//mMonitor.setControllerHeight(mClassicControllerLayout.getHeight());
@@ -149,7 +150,10 @@ public class MainActivity extends AppCompatActivity {
 		if (savedInstanceState == null) {
 			final ClassicControllerFragment ctrl = new ClassicControllerFragment();
 			ctrl.setBleWrapper(mBleWrapper);
-			//getFragmentManager().beginTransaction().add(R.id.container, ctrl).commit();
+			getFragmentManager().beginTransaction().add(R.id.root_container, ctrl).commit();
+			CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) fab.getLayoutParams();
+			p.setAnchorId(R.id.classic_controller_fragment);
+			fab.setLayoutParams(p);
 		}
 
 	}

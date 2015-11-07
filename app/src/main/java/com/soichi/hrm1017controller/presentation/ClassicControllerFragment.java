@@ -7,6 +7,7 @@ import com.soichi.hrm1017controller.util.Debug;
 import android.app.Fragment;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -32,6 +33,10 @@ public class ClassicControllerFragment extends Fragment {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                if (Debug.isEmulator()) {
+                    Log.d("ble", "clicking");
+                    return true;
+                }
                 BluetoothGattCharacteristic c = mBleWrapper.getGatt().getService(ControllerUUID.Service.CONTROLLER)
                         .getCharacteristic(ControllerUUID.Characteristic.CONTROLLER);
 
@@ -50,6 +55,10 @@ public class ClassicControllerFragment extends Fragment {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                if (Debug.isEmulator()) {
+                    Log.d("ble", "clicking");
+                    return true;
+                }
                 BluetoothGattCharacteristic c = mBleWrapper.getGatt().getService(ControllerUUID.Service.CONTROLLER)
                         .getCharacteristic(ControllerUUID.Characteristic.CONTROLLER);
 
@@ -65,8 +74,8 @@ public class ClassicControllerFragment extends Fragment {
         };
 
         View view = inflator.inflate(R.layout.fragment_controller, container, false);
-        view.findViewById(R.id.left_turn_button).setOnTouchListener(leftTurnButtonTouchListener);
-        view.findViewById(R.id.right_turn_button).setOnTouchListener(rightTurnButtonTouchListener);
+        view.findViewById(R.id.btn_left).setOnTouchListener(leftTurnButtonTouchListener);
+        view.findViewById(R.id.btn_right).setOnTouchListener(rightTurnButtonTouchListener);
 
 
         return view;
@@ -75,9 +84,10 @@ public class ClassicControllerFragment extends Fragment {
     /**
      * sets BleWrapper object
      *
-     * @param BleWrapper
+     * @param wrapper
      */
     public void setBleWrapper(BleWrapper wrapper) {
         mBleWrapper = wrapper;
     }
+
 }
