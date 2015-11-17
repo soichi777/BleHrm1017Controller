@@ -11,6 +11,9 @@
         android:id="@+id/action_stop_scan"
         android:title="Stop scan"></item>
     <item
+        android:id="@+id/start_log_output"
+        android:title="Start Log Output"></item>
+    <item
         android:id="@+id/action_toggle_classic_controller"
         android:title="@string/action_toggle_classic_controller"></item>
     <item

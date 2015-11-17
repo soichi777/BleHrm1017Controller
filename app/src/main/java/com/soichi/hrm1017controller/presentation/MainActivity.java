@@ -78,9 +78,6 @@ public class MainActivity extends AppCompatActivity {
 				if (mClassicControllerLayout == null) {
 					mClassicControllerLayout = (ClassicControllerLayout) findViewById(R.id.classic_controller_fragment);
 					mClassicControllerLayout.init();
-
-					//mMonitor.setControllerHeight(mClassicControllerLayout.getHeight());
-					//mMonitor.setClassicController(mClassicControllerLayout);
 				}
 				mClassicControllerLayout.toggleVisibility();
 			}
@@ -91,13 +88,7 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void uiDeviceFound(final BluetoothDevice device, final int rssi, final byte[] record) {
 				String msg = "uiDeviceFound: " + device.getName() + ", " + rssi + ", " + record.toString();
-				// TODO "MainActivity.this" may be wrong???
 				Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-
-				if (Debug.ACTIVE) {
-					Log.d(Debug.LOGTAG, msg);
-				}
-
 				connect(device);
 			}
 
@@ -105,40 +96,52 @@ public class MainActivity extends AppCompatActivity {
 			public void uiAvailableServices(BluetoothGatt gatt, BluetoothDevice device,
 					List<BluetoothGattService> services) {
 
-				BluetoothGattCharacteristic c;
-
 				for (BluetoothGattService service : services) {
-					// String serviceName =
-					// BleNamesResolver.resolveUuid(service.getUuid().toString());
-					// TODO
-					String serviceName = ControllerNamesResolver.resolveUuid(service.getUuid().toString());
+					String serviceName = ControllerNamesResolver.resolveServiceName(service.getUuid().toString());
 
 					if (Debug.ACTIVE) {
 						Log.d(Debug.LOGTAG, "service uuid is: " + service.getUuid() + " " + serviceName);
 					}
-
-					mBleWrapper.getCharacteristicsForService(service);
 				}
-
-				// mState = mSensorState.ACC_ENABLE;
 			}
 
 			@Override
 			public void uiNewValueForCharacteristic(BluetoothGatt gatt, BluetoothDevice device,
 					BluetoothGattService service, BluetoothGattCharacteristic ch, String strValue, int intValue,
 					byte[] rawValue, String timestamp) {
-				super.uiNewValueForCharacteristic(gatt, device, service, ch, strValue, intValue, rawValue, timestamp);
 
-				if (Debug.ACTIVE) {
-					Log.d(Debug.LOGTAG, "uiNewValueForCharacteristic");
+                Log.d(Debug.LOGTAG, "ch value " + ch.getStringValue(0));
+
+                // TODO needs a special fragment for this
+                TextView textView = (TextView) findViewById(R.id.log_output);
+                textView.setText(ch.getStringValue(0));
+			}
+
+			@Override
+			public void uiGotNotification(BluetoothGatt gatt, BluetoothDevice device,
+										  BluetoothGattService service,
+										  BluetoothGattCharacteristic characteristic) {
+				super.uiGotNotification(gatt, device, service, characteristic);
+				Log.d(Debug.LOGTAG, "uiGOtNotification called");
+				Log.d("ble notification: ", characteristic.getStringValue(0));
+			}
+
+			@Override
+			public void uiCharacteristicForService(BluetoothGatt gatt,
+												   BluetoothDevice device, BluetoothGattService service,
+												   List<BluetoothGattCharacteristic> chars) {
+				super.uiCharacteristicForService(gatt, device, service, chars);
+				Log.d(Debug.LOGTAG, "uuid " + service.getUuid());
+				while(chars.iterator().hasNext()) {
+					//Log.d(Debug.LOGTAG, "uiCharacteristicForService " + chars.iterator().next());
 				}
-
-				for (byte b : rawValue) {
-					if (Debug.ACTIVE) {
-						Log.d(Debug.LOGTAG, "Val: " + b);
-					}
-				}
-
+			}
+			@Override
+			public void uiCharacteristicsDetails(BluetoothGatt gatt,
+												 BluetoothDevice device, BluetoothGattService service,
+												 BluetoothGattCharacteristic characteristic) {
+				super.uiCharacteristicsDetails(gatt, device, service, characteristic);
+				Log.d(Debug.LOGTAG, "uiCharacteristicsDetails " + characteristic.toString());
 			}
 		});
 
@@ -181,6 +184,8 @@ public class MainActivity extends AppCompatActivity {
 			return;
 		}
 		connect(mBleWrapper.getDevice());
+
+
 	}
 
 	@Override
@@ -251,6 +256,11 @@ public class MainActivity extends AppCompatActivity {
 		public Fragment getItem(int position) {
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a PlaceholderFragment (defined as a static inner class below).
+            if (position == 0) {
+                final LogMonitorFragment log = new LogMonitorFragment();
+                //getFragmentManager().beginTransaction().add(R.id.root_container, log).commit();
+                return log;
+            }
 			return PlaceholderFragment.newInstance(position + 1);
 		}
 

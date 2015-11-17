@@ -5,7 +5,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 
-import com.soichi.hrm1017controller.presentation.main.behavior.InteractiveMonitorBehavior;
+import com.soichi.hrm1017controller.presentation.behavior.InteractiveMonitorBehavior;
 
 /**
  * Created by soichi on 2015/11/01.

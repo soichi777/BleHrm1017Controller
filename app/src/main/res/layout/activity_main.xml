@@ -28,10 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"/>
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"/>-->
 
-
-    <!--<include android:layout="@id/classic_controller_fragment"/>-->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

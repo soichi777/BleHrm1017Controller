@@ -10,6 +10,7 @@ public enum MainActivityOptionsItemAction {
     // TODO combine start and stop scan button
     STOP_SCAN(R.id.action_stop_scan, new StopScanActionHandler()),
     TOGGLE_CLASSIC_CONTROLLER(R.id.action_toggle_classic_controller, new ToggleClassicControllerActionHandler()),
+    START_LOG_OUTPUT(R.id.start_log_output, new StartLogOutputActionHandler()),
     UNKNOWN(-1, new UnknownActionHandler());
 
     private final int mMenuId;

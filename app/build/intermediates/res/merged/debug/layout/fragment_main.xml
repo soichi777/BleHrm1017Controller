@@ -14,5 +14,12 @@
         android:layout_height="match_parent"
         style="@style/InteractiveMonitor"/>
 
+    <TextView
+        android:id="@+id/log_output"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        />
+
+
 </RelativeLayout>
 <!-- From: file:/Users/soichi/StudioProjects/BleHrm1017Controller/app/src/main/res/layout/fragment_main.xml -->
