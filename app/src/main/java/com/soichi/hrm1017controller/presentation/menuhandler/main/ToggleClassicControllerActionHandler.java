@@ -1,12 +1,9 @@
-package com.soichi.hrm1017controller.presentation.menu;
+package com.soichi.hrm1017controller.presentation.menuhandler.main;
 
 import android.content.Context;
 import android.app.Activity;
-import android.util.Log;
 
-import com.soichi.hrm1017controller.R;
-import com.soichi.hrm1017controller.presentation.ClassicControllerFragment;
-import com.soichi.hrm1017controller.util.Debug;
+import com.soichi.hrm1017controller.presentation.menuhandler.OptionsItemActionHandler;
 import com.soichi.lib.ble.BleWrapper;
 
 public class ToggleClassicControllerActionHandler implements OptionsItemActionHandler {

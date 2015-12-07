@@ -1,12 +1,12 @@
-package com.soichi.hrm1017controller.presentation.menu;
+package com.soichi.hrm1017controller.presentation.menuhandler.main;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
+import com.soichi.hrm1017controller.presentation.menuhandler.OptionsItemActionHandler;
 import com.soichi.hrm1017controller.util.ControllerUUID;
 import com.soichi.hrm1017controller.util.Debug;
 import com.soichi.lib.ble.BleWrapper;

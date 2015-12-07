@@ -1,4 +1,4 @@
-package com.soichi.hrm1017controller.presentation;
+package com.soichi.hrm1017controller.controller.main;
 
 import com.soichi.hrm1017controller.R;
 import com.soichi.lib.ble.BleWrapper;
@@ -33,13 +33,15 @@ public class ClassicControllerFragment extends Fragment {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (Debug.isEmulator()) {
+                if (Debug.isEmulator() || mBleWrapper == null) {
                     Log.d("ble", "clicking");
                     return true;
                 }
                 BluetoothGattCharacteristic c = mBleWrapper.getGatt().getService(ControllerUUID.Service.CONTROLLER)
                         .getCharacteristic(ControllerUUID.Characteristic.CONTROLLER);
 
+                mBleWrapper.requestCharacteristicValue(c);
+                
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     mBleWrapper.writeDataToCharacteristic(c, new byte[]{0x01});
                     return true;
@@ -55,7 +57,7 @@ public class ClassicControllerFragment extends Fragment {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (Debug.isEmulator()) {
+                if (Debug.isEmulator() || mBleWrapper == null) {
                     Log.d("ble", "clicking");
                     return true;
                 }

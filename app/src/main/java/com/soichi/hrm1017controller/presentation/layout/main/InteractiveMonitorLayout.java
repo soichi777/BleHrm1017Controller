@@ -1,4 +1,4 @@
-package com.soichi.hrm1017controller.presentation.main.widget;
+package com.soichi.hrm1017controller.presentation.layout.main;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;

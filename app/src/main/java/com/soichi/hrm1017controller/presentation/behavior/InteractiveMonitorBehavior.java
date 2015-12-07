@@ -3,8 +3,8 @@ package com.soichi.hrm1017controller.presentation.behavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.view.View;
 
-import com.soichi.hrm1017controller.presentation.main.widget.ClassicControllerLayout;
-import com.soichi.hrm1017controller.presentation.main.widget.InteractiveMonitorLayout;
+import com.soichi.hrm1017controller.presentation.layout.main.ClassicControllerLayout;
+import com.soichi.hrm1017controller.presentation.layout.main.InteractiveMonitorLayout;
 
 /**
  * Created by soichi on 2015/11/01.

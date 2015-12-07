@@ -1,4 +1,4 @@
-package com.soichi.hrm1017controller.presentation;
+package com.soichi.hrm1017controller.controller.main;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

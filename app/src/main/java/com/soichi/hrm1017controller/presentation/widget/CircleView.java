@@ -1,4 +1,4 @@
-package com.soichi.hrm1017controller.presentation.example;
+package com.soichi.hrm1017controller.presentation.widget;
 
 /**
  * Created by soichi on 2015/10/11.

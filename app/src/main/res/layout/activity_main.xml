@@ -23,7 +23,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <com.soichi.hrm1017controller.presentation.main.widget.InteractiveMonitorLayout
+    <com.soichi.hrm1017controller.presentation.layout.main.InteractiveMonitorLayout
         android:id="@+id/interactive_monitor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

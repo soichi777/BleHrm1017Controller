@@ -1,9 +1,13 @@
-package com.soichi.hrm1017controller.presentation;
+package com.soichi.hrm1017controller.controller.main;
 
 import android.view.MenuItem;
 
 import com.soichi.hrm1017controller.R;
-import com.soichi.hrm1017controller.presentation.menu.*;
+import com.soichi.hrm1017controller.presentation.menuhandler.*;
+import com.soichi.hrm1017controller.presentation.menuhandler.main.StartLogOutputActionHandler;
+import com.soichi.hrm1017controller.presentation.menuhandler.main.StartScanActionHandler;
+import com.soichi.hrm1017controller.presentation.menuhandler.main.StopScanActionHandler;
+import com.soichi.hrm1017controller.presentation.menuhandler.main.ToggleClassicControllerActionHandler;
 
 public enum MainActivityOptionsItemAction {
     START_SCAN(R.id.action_start_scan, new StartScanActionHandler()),

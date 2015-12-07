@@ -1,4 +1,4 @@
-package com.soichi.hrm1017controller.presentation.menu;
+package com.soichi.hrm1017controller.presentation.menuhandler;
 
 import com.soichi.lib.ble.BleWrapper;
 
