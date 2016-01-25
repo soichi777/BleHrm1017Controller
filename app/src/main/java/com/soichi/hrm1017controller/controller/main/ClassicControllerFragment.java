@@ -37,11 +37,12 @@ public class ClassicControllerFragment extends Fragment {
                     Log.d("ble", "clicking");
                     return true;
                 }
+
                 BluetoothGattCharacteristic c = mBleWrapper.getGatt().getService(ControllerUUID.Service.CONTROLLER)
                         .getCharacteristic(ControllerUUID.Characteristic.CONTROLLER);
 
-                mBleWrapper.requestCharacteristicValue(c);
-                
+                //mBleWrapper.getCharacteristicsForService(mBleWrapper.getGatt().getService(ControllerUUID.Service.LOG));
+
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     mBleWrapper.writeDataToCharacteristic(c, new byte[]{0x01});
                     return true;
@@ -61,8 +62,11 @@ public class ClassicControllerFragment extends Fragment {
                     Log.d("ble", "clicking");
                     return true;
                 }
+
                 BluetoothGattCharacteristic c = mBleWrapper.getGatt().getService(ControllerUUID.Service.CONTROLLER)
                         .getCharacteristic(ControllerUUID.Characteristic.CONTROLLER);
+
+                //mBleWrapper.getCharacteristicsForService(mBleWrapper.getGatt().getService(ControllerUUID.Service.LOG));
 
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     mBleWrapper.writeDataToCharacteristic(c, new byte[]{0x03});
@@ -75,10 +79,31 @@ public class ClassicControllerFragment extends Fragment {
             }
         };
 
+        OnTouchListener moveForwardButtonTouchListener = new OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                BluetoothGattCharacteristic c = mBleWrapper.getGatt().getService(ControllerUUID.Service.CONTROLLER)
+                        .getCharacteristic(ControllerUUID.Characteristic.CONTROLLER);
+
+                //mBleWrapper.getCharacteristicsForService(mBleWrapper.getGatt().getService(ControllerUUID.Service.LOG));
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    mBleWrapper.writeDataToCharacteristic(c, new byte[]{0x05});
+                    return true;
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    mBleWrapper.writeDataToCharacteristic(c, new byte[]{0x06});
+                    return true;
+                }
+                return false;
+            }
+        };
+
         View view = inflator.inflate(R.layout.fragment_controller, container, false);
         view.findViewById(R.id.btn_left).setOnTouchListener(leftTurnButtonTouchListener);
         view.findViewById(R.id.btn_right).setOnTouchListener(rightTurnButtonTouchListener);
-
+        view.findViewById(R.id.btn_forward).setOnTouchListener(moveForwardButtonTouchListener);
 
         return view;
     }

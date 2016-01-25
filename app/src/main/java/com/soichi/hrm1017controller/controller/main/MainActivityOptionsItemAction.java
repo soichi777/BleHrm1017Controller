@@ -4,6 +4,7 @@ import android.view.MenuItem;
 
 import com.soichi.hrm1017controller.R;
 import com.soichi.hrm1017controller.presentation.menuhandler.*;
+import com.soichi.hrm1017controller.presentation.menuhandler.main.SettingsActionHandler;
 import com.soichi.hrm1017controller.presentation.menuhandler.main.StartLogOutputActionHandler;
 import com.soichi.hrm1017controller.presentation.menuhandler.main.StartScanActionHandler;
 import com.soichi.hrm1017controller.presentation.menuhandler.main.StopScanActionHandler;
@@ -15,6 +16,7 @@ public enum MainActivityOptionsItemAction {
     STOP_SCAN(R.id.action_stop_scan, new StopScanActionHandler()),
     TOGGLE_CLASSIC_CONTROLLER(R.id.action_toggle_classic_controller, new ToggleClassicControllerActionHandler()),
     START_LOG_OUTPUT(R.id.start_log_output, new StartLogOutputActionHandler()),
+    SETTINGS_PAGE(R.id.action_settings, new SettingsActionHandler()),
     UNKNOWN(-1, new UnknownActionHandler());
 
     private final int mMenuId;

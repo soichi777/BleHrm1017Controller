@@ -29,6 +29,7 @@ import com.soichi.hrm1017controller.R;
 import com.soichi.hrm1017controller.presentation.layout.main.ClassicControllerLayout;
 import com.soichi.hrm1017controller.presentation.layout.main.InteractiveMonitorLayout;
 import com.soichi.hrm1017controller.util.ControllerNamesResolver;
+import com.soichi.hrm1017controller.util.ControllerUUID;
 import com.soichi.hrm1017controller.util.Debug;
 import com.soichi.lib.ble.BleWrapper;
 import com.soichi.lib.ble.BleWrapperUiCallbacks;
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
                     if (Debug.ACTIVE) {
                         Log.d(Debug.LOGTAG, "service uuid is: " + service.getUuid() + " " + serviceName);
+                        //Log.d(Debug.LOGTAG, "value is " + service.getCharacteristic(ControllerUUID.Characteristic.ACTION_LOG).getValue());
                     }
                 }
             }
@@ -107,18 +109,20 @@ public class MainActivity extends AppCompatActivity {
             public void uiNewValueForCharacteristic(BluetoothGatt gatt, BluetoothDevice device,
                                                     BluetoothGattService service, BluetoothGattCharacteristic ch, String strValue, int intValue,
                                                     byte[] rawValue, String timestamp) {
+                super.uiNewValueForCharacteristic(gatt, device, service, ch, strValue, intValue, rawValue, timestamp);
 
-                Log.d(Debug.LOGTAG, "ch value " + ch.getStringValue(0));
+                Log.d(Debug.LOGTAG, "ui new value ");
 
                 // TODO needs a special fragment for this
-                TextView textView = (TextView) findViewById(R.id.log_output);
-                textView.setText(ch.getStringValue(0));
+                //TextView textView = (TextView) findViewById(R.id.log_output);
+                //textView.setText(ch.getStringValue(0));
             }
 
             @Override
             public void uiGotNotification(BluetoothGatt gatt, BluetoothDevice device,
                                           BluetoothGattService service,
                                           BluetoothGattCharacteristic characteristic) {
+                super.uiGotNotification(gatt, device, service, characteristic);
                 Log.d(Debug.LOGTAG, "uiGOtNotification called");
                 Log.d("ble notification: ", characteristic.getStringValue(0));
             }
@@ -127,19 +131,35 @@ public class MainActivity extends AppCompatActivity {
             public void uiCharacteristicForService(BluetoothGatt gatt,
                                                    BluetoothDevice device, BluetoothGattService service,
                                                    List<BluetoothGattCharacteristic> chars) {
-                super.uiCharacteristicForService(gatt, device, service, chars);
-                Log.d(Debug.LOGTAG, "uuid " + service.getUuid());
-                while (chars.iterator().hasNext()) {
-                    //Log.d(Debug.LOGTAG, "uiCharacteristicForService " + chars.iterator().next());
+                //Log.d(Debug.LOGTAG, "showing log: length is " + chars.size());
+                //Log.d(Debug.LOGTAG, "service is " + service.getCharacteristic(ControllerUUID.Characteristic.ACTION_LOG));
+                Log.d(Debug.LOGTAG, "message is " + chars.get(0).getValue());
+                if (chars.get(0).getValue() != null) {
+                    Log.d(Debug.LOGTAG, "log is " + chars.get(0).getValue().toString());
                 }
+//                while (chars.iterator().hasNext()) {
+//                    Log.d(Debug.LOGTAG, "uiCharacteristicForService ");
+//                }
             }
 
             @Override
             public void uiCharacteristicsDetails(BluetoothGatt gatt,
                                                  BluetoothDevice device, BluetoothGattService service,
                                                  BluetoothGattCharacteristic characteristic) {
-                super.uiCharacteristicsDetails(gatt, device, service, characteristic);
-                Log.d(Debug.LOGTAG, "uiCharacteristicsDetails " + characteristic.toString());
+                Log.d(Debug.LOGTAG, "ui char details ");
+            }
+
+            @Override
+            public void uiSuccessfulWrite(BluetoothGatt gatt, BluetoothDevice device,
+                                          BluetoothGattService service, BluetoothGattCharacteristic ch,
+                                          String description) {
+                //Log.d(Debug.LOGTAG, "successful write");
+            }
+            @Override
+            public void uiFailedWrite(BluetoothGatt gatt, BluetoothDevice device,
+                                      BluetoothGattService service, BluetoothGattCharacteristic ch,
+                                      String description) {
+                Log.d(Debug.LOGTAG, "failed write");
             }
         });
 
@@ -218,6 +238,10 @@ public class MainActivity extends AppCompatActivity {
             return status;
         }
 
+        if (device.getName() == null) {
+            return status;
+        }
+
         if (device.getName().equals("mbed AI robot")) {
             status = mBleWrapper.connect(device.getAddress());
             if (status == false) {
@@ -226,6 +250,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+        Log.d(Debug.LOGTAG, "connection handle is : " + device.describeContents());
         return status;
     }
 

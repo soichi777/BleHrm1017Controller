@@ -21,6 +21,8 @@ import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.util.Log;
 
+import com.soichi.hrm1017controller.util.Debug;
+
 public class BleWrapper {
 	/* defines (in milliseconds) how often RSSI should be updated */
     private static final int RSSI_UPDATE_TIME_INTERVAL = 1500; // 1.5 seconds
@@ -368,6 +370,7 @@ public class BleWrapper {
             	// now, when services discovery is finished, we can call getServices() for Gatt
             	getSupportedServices();
             }
+            Log.d(Debug.LOGTAG, "services discovered ");
         }
 
         @Override
@@ -380,6 +383,7 @@ public class BleWrapper {
             	// and it success, so we can get the value
             	getCharacteristicValue(characteristic);
             }
+            Log.d(Debug.LOGTAG, "reading data from robot");
         }
 
         @Override
@@ -391,6 +395,7 @@ public class BleWrapper {
         	getCharacteristicValue(characteristic);
         	// also, notify UI that notification are enabled for particular characteristic
         	mUiCallback.uiGotNotification(mBluetoothGatt, mBluetoothDevice, mBluetoothSelectedService, characteristic);
+            Log.d(Debug.LOGTAG, "characteristic changed");
         }
         
         @Override
@@ -408,6 +413,7 @@ public class BleWrapper {
         	else {
         		 mUiCallback.uiFailedWrite(mBluetoothGatt, mBluetoothDevice, mBluetoothSelectedService, characteristic, description + " STATUS = " + status);
         	}
+            //Log.d(Debug.LOGTAG, "characteristic write " + characteristic.getValue().toString());
         };
         
         @Override
